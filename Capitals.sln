@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitals.UnitTest", "test\C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitals.FunctionalTest", "test\Capitals.FunctionalTest\Capitals.FunctionalTest.csproj", "{7797863D-190C-47F3-A01F-E7D29C2E0574}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Capitals.EndToEndTest", "test\Capitals.EndToEndTest\Capitals.EndToEndTest.csproj", "{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{7797863D-190C-47F3-A01F-E7D29C2E0574}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7797863D-190C-47F3-A01F-E7D29C2E0574}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7797863D-190C-47F3-A01F-E7D29C2E0574}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +59,7 @@ Global
 		{03B0D95B-440C-4A88-ADE3-B90029C917FF} = {F6B218B4-6696-4C77-8BA5-6A57163C76C4}
 		{B07F92D2-4B2C-476C-B7F3-83F5FDE3DC0B} = {A70C0C0B-3B5E-4D2D-A46D-11435735331E}
 		{7797863D-190C-47F3-A01F-E7D29C2E0574} = {A70C0C0B-3B5E-4D2D-A46D-11435735331E}
+		{F96E0FE5-0C0E-467E-BCC7-614CB8C692D1} = {A70C0C0B-3B5E-4D2D-A46D-11435735331E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {4F387A51-2130-4002-90F5-94F5062C5F24}

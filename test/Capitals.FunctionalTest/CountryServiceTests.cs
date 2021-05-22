@@ -28,5 +28,14 @@ namespace Capitals.FunctionalTest
             var capitalsResult = await countryService.GetCapitalsByCountryName(country);
             capitalsResult.Select(s => s.Name).Should().BeEquivalentTo(capitals);
         }
+
+        [Fact]
+        public async Task GetCapitalFromNull()
+        {
+            var countryService = _serviceProvider.GetService<ICountryService>();
+
+            var capitalsResult = await countryService.GetCapitalsByCountryName(null);
+            capitalsResult.Should().BeNullOrEmpty();
+        }
     }
 }
