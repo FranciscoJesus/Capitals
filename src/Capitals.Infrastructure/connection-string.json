@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "CapitalsConnectionString": "Server=127.0.0.1;port=5432;Database=market_catalog;User Id=market_catalog_user;Password=m@rk3t_catal0g_us3r;Persist Security Info=true;"
+  }
+}
