@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Ardalis.GuardClauses;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Capitals.Core.Entities
@@ -13,11 +14,13 @@ namespace Capitals.Core.Entities
 
         public Country(string name)
         {
+            Guard.Against.NullOrEmpty(name, nameof(name));
             Name = name;
         }
 
         public void AddCapital(string name)
         {
+            Guard.Against.NullOrEmpty(name, nameof(name));
             var capital = _capitals.FirstOrDefault(c => c.Name == name);
 
             if (capital is null)

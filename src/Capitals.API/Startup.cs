@@ -1,4 +1,3 @@
-using AutoMapper;
 using Capitals.Core.Interfaces;
 using Capitals.Core.Services;
 using Capitals.Infrastructure.Data;

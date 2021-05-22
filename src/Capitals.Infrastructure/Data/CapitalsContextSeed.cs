@@ -11,24 +11,26 @@ namespace Capitals.Infrastructure.Data
         public static async Task SeedAsync(CapitalsContext catalogContext,
             int? retry = 0)
         {
-            CountryInfoServiceSoapTypeClient client = new CountryInfoServiceSoapTypeClient(CountryInfoServiceSoapTypeClient.EndpointConfiguration.CountryInfoServiceSoap);
-
-            var result = await client.FullCountryInfoAllCountriesAsync();
-
-            var countriesToInsert = new List<Country>();
-            var countries = result.Body.FullCountryInfoAllCountriesResult.GroupBy(c => c.sName);
-            foreach (var country in countries)
+            using (CountryInfoServiceSoapTypeClient client = new CountryInfoServiceSoapTypeClient(CountryInfoServiceSoapTypeClient.EndpointConfiguration.CountryInfoServiceSoap))
             {
-                var countryToInsert = new Country(country.Key);
-                var capitals = result.Body.FullCountryInfoAllCountriesResult.Where(c => c.sName == country.Key).Select(s => s.sCapitalCity).ToList();
-                capitals.ForEach(capital =>
+
+                var result = await client.FullCountryInfoAllCountriesAsync();
+
+                var countriesToInsert = new List<Country>();
+                var countries = result.Body.FullCountryInfoAllCountriesResult.GroupBy(c => c.sName);
+                foreach (var country in countries)
                 {
-                    countryToInsert.AddCapital(capital);
-                });
-                countriesToInsert.Add(countryToInsert);
+                    var countryToInsert = new Country(country.Key);
+                    var capitals = result.Body.FullCountryInfoAllCountriesResult.Where(c => c.sName == country.Key).Select(s => s.sCapitalCity).ToList();
+                    capitals.ForEach(capital =>
+                    {
+                        countryToInsert.AddCapital(capital);
+                    });
+                    countriesToInsert.Add(countryToInsert);
+                }
+                await catalogContext.AddRangeAsync(countriesToInsert);
+                await catalogContext.SaveChangesAsync();
             }
-            await catalogContext.AddRangeAsync(countriesToInsert);
-            await catalogContext.SaveChangesAsync();
         }
 
         static IEnumerable<Country> GetPreconfiguredItems()
@@ -38,7 +40,7 @@ namespace Capitals.Infrastructure.Data
                 new Country("España"),
             };
 
-            countries.ForEach(c => 
+            countries.ForEach(c =>
             {
                 c.AddCapital("");
             });
