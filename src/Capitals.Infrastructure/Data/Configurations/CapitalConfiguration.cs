@@ -13,7 +13,7 @@ namespace Capitals.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Capital> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(256);
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(256);
             builder.HasOne(ho => ho.Country).WithMany(wm => wm.Capitals).HasForeignKey(fk => fk.CountryId);
         }
     }

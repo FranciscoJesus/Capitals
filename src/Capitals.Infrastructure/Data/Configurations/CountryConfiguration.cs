@@ -8,7 +8,7 @@ namespace Capitals.Infrastructure.Data.Configurations
     {
         public void Configure(EntityTypeBuilder<Country> builder)
         {
-            builder.Property(p => p.Name).HasMaxLength(256);
+            builder.Property(p => p.Name).IsRequired().HasMaxLength(256);
         }
     }
 }

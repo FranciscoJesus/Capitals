@@ -1,17 +1,21 @@
+using Capitals.API.ViewModels;
 using Capitals.EndToEndTest.Fakes;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc.Testing;
-using Microsoft.AspNetCore.TestHost;
+using FluentAssertions;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Linq;
 using Xunit;
 
 namespace Capitals.EndToEndTest
 {
-    public class CapitalControllerTests : IClassFixture<WebApplicationFactory<FakeStartup>>
+    public class CapitalControllerTests : IClassFixture<CapitalsWebApplicationFactory>
     {
-        private readonly WebApplicationFactory<FakeStartup> _factory;
-        public CapitalControllerTests(WebApplicationFactory<FakeStartup> factory)
+        private readonly CapitalsWebApplicationFactory _factory;
+        public CapitalControllerTests(CapitalsWebApplicationFactory factory)
         {
             _factory = factory;
         }
@@ -20,7 +24,31 @@ namespace Capitals.EndToEndTest
         public async Task GetCapital()
         {
             var client = _factory.CreateClient();
-            var result = await client.GetAsync("api/countries/Spain/capitals");
+            var result = await client.GetAsync("/api/countries/Spain/capitals");
+
+            result.StatusCode.Should().Be(HttpStatusCode.OK);
+            var capitals = await Deserialize<IEnumerable<CapitalViewModel>>(result);
+            capitals.Should().HaveCount(1);
+            capitals.FirstOrDefault().Name.Should().Be("Madrid");
+        }
+
+        [Fact]
+        public async Task CountryDoesnotExist()
+        {
+            var client = _factory.CreateClient();
+            var result = await client.GetAsync("/api/countries/Cataluña/capitals");
+
+            result.StatusCode.Should().Be(HttpStatusCode.NotFound);
+        }
+
+        private async Task<T> Deserialize<T>(HttpResponseMessage response)
+        {
+            using var responseStream = await response.Content.ReadAsStreamAsync();
+            using var sr = new StreamReader(responseStream);
+            using JsonReader reader = new JsonTextReader(sr);
+            JsonSerializer serializer = new JsonSerializer();
+
+            return serializer.Deserialize<T>(reader);
         }
     }
 }

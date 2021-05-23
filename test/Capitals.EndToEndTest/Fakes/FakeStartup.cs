@@ -21,7 +21,7 @@ namespace Capitals.EndToEndTest.Fakes
 
         public override void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllers().AddApplicationPart(typeof(Startup).Assembly);
             services.AddDbContext<CapitalsContext>(c =>
              c.UseInMemoryDatabase("Capitals"));
             services.AddScoped<ICountryService, CountryService>();
