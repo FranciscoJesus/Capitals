@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { CapitalsComponent } from './capitals.component';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from 'src/common/material.module';
 
 
 
@@ -19,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
       }]),
     FormsModule,   
     ReactiveFormsModule,
+    MaterialModule,
   ]
 })
 export class CapitalsModule { }

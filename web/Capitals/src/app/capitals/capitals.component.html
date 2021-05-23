@@ -1,28 +1,34 @@
-<div class="card">
-    <div class="card-body">
+<mat-card>
+    <mat-card-content>
         <form novalidate
         [formGroup]="searchForm">
         <p>Type a Country and then click the button to search their capitals</p>
-        <input  matInput 
-                class="form-control"
-                 id="countrySearch"
-                 type="text"
-                 placeholder="Type a country"
-                 formControlName="countrySearch" />
-        <button mat-button color="primary"
-                 type="button"
-                 (click)="searchCapital()">
-           Search Capital
-         </button>       
+        <mat-form-field>
+            <input  matInput 
+                    class="form-control"
+                    id="countrySearch"
+                    type="text"
+                    placeholder="Type a country"
+                    formControlName="countrySearch" />
+        </mat-form-field>
+        <mat-card-actions>
+            <button mat-raised-button color="primary"
+                    type="button"
+                    (click)="searchCapital()">
+            Search Capital
+            </button>       
+        </mat-card-actions>
         </form>
-        <div *ngIf="capitals">
-            <h3>Capitals</h3>
-            <ul>
-                <li *ngFor="let capital of capitals">
-                    <span>{{capital.name}}</span>
-                </li>
-            </ul>
-        </div>
-    </div>
-</div>
+        <ng-container *ngIf="capitals$ | async as capitals">
+            <div *ngIf="capitals.length > 0">
+                <h3>Capitals</h3>
+                <ul>
+                    <li *ngFor="let capital of capitals">
+                        <span>{{capital.name}}</span>
+                    </li>
+                </ul>
+            </div>
+        </ng-container>
+    </mat-card-content>
+</mat-card>
 

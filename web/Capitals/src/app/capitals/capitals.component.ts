@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { CapitalViewModel } from './capitals.model';
 import { CapitalsService } from './capitals.service';
 
 @Component({
@@ -11,7 +10,7 @@ import { CapitalsService } from './capitals.service';
 export class CapitalsComponent implements OnInit {
 
   searchForm: FormGroup;
-  capitals: CapitalViewModel[] = [];
+  capitals$ = this.capitalsService.country$;
 
   constructor(private capitalsService: CapitalsService,
               private fb: FormBuilder) { }
@@ -23,14 +22,10 @@ export class CapitalsComponent implements OnInit {
   }
 
   searchCapital() : void{
+    debugger
     let country = this.searchForm.get('countrySearch')?.value;
     if(country){
-      this.capitalsService.getCapitalsByCountry(country).subscribe(capitals => 
-        {
-          this.capitals = capitals;
-        }, error => {
-          this.capitals = [];
-        })
+      this.capitalsService.setCountry(country);
     }
   }
 

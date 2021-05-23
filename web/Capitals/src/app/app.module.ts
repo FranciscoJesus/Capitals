@@ -15,10 +15,7 @@ import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from '@angular/material/form-field';
   imports: [
     BrowserModule,
     BrowserAnimationsModule, 
-    FormsModule,   
-    ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule,
     AppRoutingModule,
   ],
   providers: [],
