@@ -26,6 +26,15 @@ namespace Capitals.API
         {
 
             services.AddControllers();
+            services.AddCors(options => 
+            {
+                options.AddPolicy("Allow-All-Origins", builder =>
+                {
+                    builder.AllowAnyOrigin();
+                    builder.AllowAnyMethod();
+                    builder.AllowAnyHeader();
+                });
+            });
             if (Environment.IsDevelopment())
             {
                 services.AddDbContext<CapitalsContext>(c =>
@@ -49,10 +58,11 @@ namespace Capitals.API
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseCors("Allow-All-Origins");
 
             app.UseAuthorization();
 
